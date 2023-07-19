@@ -1,0 +1,88 @@
+@use '../../../styles/globals.scss' as globals;
+@use '../../../styles.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  form {
+    margin-top: globals.pxToRem(30);
+    margin-bottom: globals.pxToRem(50);
+    margin-left: globals.pxToRem(50);
+
+    ol {
+      li.option_wrapper {
+        display: block;
+
+        & + li.option_wrapper {
+          margin-top: globals.pxToRem(20);
+        }
+
+        label {
+          @include globals.font(25, 30);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+
+          input {
+            display: inline-block;
+            width: globals.pxToRem(30);
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background: #E7E7E7;
+            margin-right: globals.pxToRem(15);
+            position: relative;
+
+            &:checked::before {
+              content: '';
+              display: inline-block;
+              width: globals.pxToRem(20);
+              aspect-ratio: 1/1;
+              background: #279DE5;
+              border-radius: 50%;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+
+            &:disabled {
+              cursor: not-allowed;
+            }
+          }
+
+          &.correct {
+            background: #86D7B0;
+          }
+
+          &.incorrect {
+            background: #F68B8B;
+          }
+
+          &.disabled {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+
+  button {
+    @extend %primary_button;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    margin-top: auto;
+    margin-bottom: globals.pxToRem(100);
+    padding-left: 0;
+    padding-right: 0;
+    transition: opacity 0.25s ease-in-out;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

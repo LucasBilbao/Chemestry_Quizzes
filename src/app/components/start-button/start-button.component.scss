@@ -1,0 +1,15 @@
+@use '../../../styles/globals.scss' as globals;
+@use '../../../styles.scss' as styles;
+
+:host {
+  width: 100%;
+  height: 100dvh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    @extend %primary_button;
+  }
+}

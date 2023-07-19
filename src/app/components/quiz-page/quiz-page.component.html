@@ -1,0 +1,23 @@
+<p>Score: {{score}} / {{quizzes.length}}</p>
+<h1>{{activeQuizIndex + 1}}.</h1>
+<h1 *ngFor="let question_part of quizzes[activeQuizIndex].question.split('\n')">{{question_part}}</h1>
+
+<form action="">
+  <ol>
+    <li *ngFor="let option of quizzes[activeQuizIndex].options; let i = index" class="option_wrapper">
+      <label (click)="updateChosenOption(i)"
+             [class.correct]="hasBeenChecked && option === quizzes[activeQuizIndex].answer"
+             [class.incorrect]="hasBeenChecked && chosenOption === i && option !== quizzes[activeQuizIndex].answer"
+             [for]="'option_'+i"
+      >
+        <input [checked]="chosenOption === i" [disabled]="hasBeenChecked" [id]="'option_'+i" name="option" type="radio">
+        {{option}}
+      </label>
+    </li>
+  </ol>
+</form>
+
+<button (click)="onCheckClick()" *ngIf="!hasBeenChecked" [disabled]="chosenOption === -1">Check</button>
+<button (click)="onNextClick()" *ngIf="hasBeenChecked"
+        [disabled]="chosenOption === -1 || activeQuizIndex === quizzes.length-1">Next
+</button>
